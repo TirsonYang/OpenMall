@@ -1,9 +1,9 @@
-package ytx.openmall.server.service.seller;
+package ytx.openmall.server.service;
 
 
 import ytx.openmall.pojo.entity.Seller;
 
-public interface RegisterService {
+public interface SellerService {
 
 
     void insert(Seller seller);

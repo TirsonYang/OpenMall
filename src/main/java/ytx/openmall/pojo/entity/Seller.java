@@ -16,5 +16,9 @@ public class Seller {
     private Long id;
     private String username;
     private String password;
+    private String name;
+    private String logo;
+    private String phone;
     private LocalDate createTime;
+    private LocalDate updateTime;
 }

@@ -12,6 +12,8 @@ import java.util.Date;
 @Data
 public class SellerRegisterDTO {
     private Long id;
+
     private String username;
+
     private String password;
 }

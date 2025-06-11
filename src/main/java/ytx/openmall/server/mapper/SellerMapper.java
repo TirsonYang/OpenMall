@@ -1,12 +1,11 @@
-package ytx.openmall.server.mapper.seller;
+package ytx.openmall.server.mapper;
 
 
 import org.apache.ibatis.annotations.Mapper;
-import ytx.openmall.pojo.DTO.SellerRegisterDTO;
 import ytx.openmall.pojo.entity.Seller;
 
 @Mapper
-public interface SellerRegisterMapper {
+public interface SellerMapper {
 
      void insert(Seller seller);
 }
