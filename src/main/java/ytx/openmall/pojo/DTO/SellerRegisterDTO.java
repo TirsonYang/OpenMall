@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -13,5 +14,4 @@ public class SellerRegisterDTO {
     private Long id;
     private String username;
     private String password;
-    private Date  createTime;
 }
