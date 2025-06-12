@@ -4,6 +4,11 @@
 
 
     <insert id="insert">
-        insert into open_mall.seller (id, username, password, create_time) VALUES (#{id},#{username},#{password},#{createTime})
+        insert into open_mall.seller (id, username, password, create_time, update_time) VALUES (#{id},#{username},#{password},#{createTime},#{updateTime})
     </insert>
+
+
+    <select id="login" resultType="ytx.openmall.pojo.VO.SellerLoginVO">
+        select id,username from open_mall.seller where username=#{username} and password=#{password};
+    </select>
 </mapper>
