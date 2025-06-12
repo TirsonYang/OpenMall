@@ -5,6 +5,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import ytx.openmall.common.Properties.JwtProperty;
 import ytx.openmall.common.util.JWTUtils;
 import ytx.openmall.pojo.DTO.SellerLoginDTO;
 import ytx.openmall.pojo.VO.SellerLoginVO;
@@ -27,6 +28,8 @@ public class SellerServiceImpl implements SellerService {
 
     @Autowired
     private SellerMapper sellerMapper;
+    @Autowired
+    private JwtProperty jwtProperty;
 
 
     /**
@@ -51,14 +54,12 @@ public class SellerServiceImpl implements SellerService {
         sellerLoginDTO.setPassword(password);
         SellerLoginVO sellerLoginVO=sellerMapper.login(sellerLoginDTO);
 
-        Map<String, Object> map=new HashMap<>();
-        map.put("username",sellerLoginVO.getUsername());
-        map.put("id",sellerLoginVO.getId());
-        String jwt=JWTUtils.generateJWT(map);
+        Map<String, Object> claims=new HashMap<>();
+        claims.put("SellerUsername",sellerLoginVO.getUsername());
+        claims.put("SellerID",sellerLoginVO.getId());
+        String jwt=JWTUtils.generateJWT(jwtProperty.getSellerSecretKey(), jwtProperty.getSellerTtl(), claims);
         sellerLoginVO.setJwt(jwt);
-
         return sellerLoginVO;
-
     }
 
 

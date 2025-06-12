@@ -11,3 +11,9 @@ mybatis:
   configuration:
     #开启驼峰命名
     map-underscore-to-camel-case: true
+
+open:
+  jwt:
+    seller-secret-key: ytxseller
+    seller-token-name: sellerToken
+    seller-ttl: 7200000
