@@ -8,7 +8,41 @@
     </insert>
 
 
+    <update id="updateById">
+        update open_mall.seller
+        <set>
+            <if test="username != null">
+                username=#{username},
+            </if>
+            <if test="password != null">
+                password= #{password},
+            </if>
+            <if test="name != null">
+                name= #{name},
+            </if>
+            <if test="logo!=null">
+                logo=#{logo},
+            </if>
+            <if test="phone!=null">
+                phone=#{phone},
+            </if>
+            <if test="createTime!=null">
+                create_time= #{createTime},
+            </if>
+            <if test="updateTime!=null">
+                update_time= #{updateTime},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
     <select id="login" resultType="ytx.openmall.pojo.VO.SellerLoginVO">
-        select id,username from open_mall.seller where username=#{username} and password=#{password};
+        select * from open_mall.seller where username=#{username} and password=#{password}
+    </select>
+
+
+    <select id="queryById" resultType="ytx.openmall.pojo.entity.Seller">
+        select * from open_mall.seller where id=#{id}
     </select>
 </mapper>

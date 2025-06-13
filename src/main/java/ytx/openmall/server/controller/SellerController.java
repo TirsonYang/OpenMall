@@ -1,5 +1,6 @@
 package ytx.openmall.server.controller;
 
+import io.netty.util.ResourceLeakDetector;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ytx.openmall.common.constant.LoginConstant;
 import ytx.openmall.common.constant.RegisterConstant;
+import ytx.openmall.common.exception.BaseException;
 import ytx.openmall.common.result.Result;
 import ytx.openmall.pojo.DTO.SellerLoginDTO;
 import ytx.openmall.pojo.DTO.SellerRegisterDTO;
+import ytx.openmall.pojo.DTO.SellerUpdatePasswordDTO;
 import ytx.openmall.pojo.VO.SellerLoginVO;
 import ytx.openmall.pojo.entity.Seller;
 import ytx.openmall.server.service.SellerService;
@@ -62,6 +65,25 @@ public class SellerController {
 
 
         return Result.success(sellerLoginVO);
+    }
+
+
+    @PostMapping("/password")
+    Result sellerUpdatePassword(@RequestBody SellerUpdatePasswordDTO sellerUpdatePasswordDTO){
+        log.info("修改密码");
+        if (sellerUpdatePasswordDTO==null){
+            throw new BaseException("传参不能为空");
+        }
+
+        int flag=sellerService.updatePassword(sellerUpdatePasswordDTO);
+
+        if (flag==1){
+            return Result.error("用户不存在");
+        } else if (flag==2) {
+            return Result.error("密码错误");
+        }
+
+        return Result.success();
     }
 
 

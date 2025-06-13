@@ -12,4 +12,9 @@ public interface SellerMapper {
      void insert(Seller seller);
 
     SellerLoginVO login(SellerLoginDTO sellerLoginDTO);
+
+
+    Seller queryById(Long id);
+
+    void updateById(Seller seller);
 }
