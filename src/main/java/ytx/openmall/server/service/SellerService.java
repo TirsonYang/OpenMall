@@ -2,6 +2,7 @@ package ytx.openmall.server.service;
 
 
 import ytx.openmall.pojo.DTO.SellerLoginDTO;
+import ytx.openmall.pojo.DTO.SellerUpdateDTO;
 import ytx.openmall.pojo.DTO.SellerUpdatePasswordDTO;
 import ytx.openmall.pojo.VO.SellerLoginVO;
 import ytx.openmall.pojo.entity.Seller;
@@ -16,4 +17,6 @@ public interface SellerService {
     SellerLoginVO login(SellerLoginDTO sellerLoginDTO);
 
     int updatePassword(SellerUpdatePasswordDTO sellerUpdatePasswordDTO);
+
+    void update(SellerUpdateDTO sellerUpdateDTO);
 }

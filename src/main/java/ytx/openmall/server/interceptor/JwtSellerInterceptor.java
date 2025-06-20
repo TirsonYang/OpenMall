@@ -23,8 +23,14 @@ public class JwtSellerInterceptor implements HandlerInterceptor {
     private JwtProperty jwtProperty;
 
 
-
-    //
+    /**
+     * JWT登录拦截器
+     * @param request
+     * @param response
+     * @param handler
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (!(handler instanceof HandlerMethod)){
@@ -45,8 +51,6 @@ public class JwtSellerInterceptor implements HandlerInterceptor {
             response.setStatus(401);     //返回异常状态码
             return false;
         }
-
-
     }
 
 

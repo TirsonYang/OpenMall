@@ -8,6 +8,7 @@ import org.springframework.util.DigestUtils;
 import ytx.openmall.common.properties.JwtProperty;
 import ytx.openmall.common.util.JWTUtils;
 import ytx.openmall.pojo.DTO.SellerLoginDTO;
+import ytx.openmall.pojo.DTO.SellerUpdateDTO;
 import ytx.openmall.pojo.DTO.SellerUpdatePasswordDTO;
 import ytx.openmall.pojo.VO.SellerLoginVO;
 import ytx.openmall.pojo.entity.Seller;
@@ -77,6 +78,20 @@ public class SellerServiceImpl implements SellerService {
         seller.setUpdateTime(LocalDate.now());
         sellerMapper.updateById(seller);
         return 0;
+    }
+
+    /**
+     * 修改商家信息
+     * @param sellerUpdateDTO
+     */
+    @Override
+    public void update(SellerUpdateDTO sellerUpdateDTO) {
+        Seller seller=new Seller();
+
+        // TODO 商家头像logo上传阿里云
+
+        BeanUtils.copyProperties(sellerUpdateDTO,seller);
+        sellerMapper.updateById(seller);
     }
 
 

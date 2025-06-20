@@ -14,6 +14,7 @@ import ytx.openmall.common.exception.BaseException;
 import ytx.openmall.common.result.Result;
 import ytx.openmall.pojo.DTO.SellerLoginDTO;
 import ytx.openmall.pojo.DTO.SellerRegisterDTO;
+import ytx.openmall.pojo.DTO.SellerUpdateDTO;
 import ytx.openmall.pojo.DTO.SellerUpdatePasswordDTO;
 import ytx.openmall.pojo.VO.SellerLoginVO;
 import ytx.openmall.pojo.entity.Seller;
@@ -48,6 +49,12 @@ public class SellerController {
         return Result.success();
     }
 
+
+    /**
+     * 商家登录
+     * @param sellerLoginDTO
+     * @return
+     */
     @PostMapping("/login")
     Result<SellerLoginVO> sellerLogin(@RequestBody SellerLoginDTO sellerLoginDTO){
         log.info("商家登录");
@@ -68,6 +75,11 @@ public class SellerController {
     }
 
 
+    /**
+     * 修改密码
+     * @param sellerUpdatePasswordDTO
+     * @return
+     */
     @PostMapping("/password")
     Result sellerUpdatePassword(@RequestBody SellerUpdatePasswordDTO sellerUpdatePasswordDTO){
         log.info("修改密码");
@@ -82,6 +94,15 @@ public class SellerController {
         } else if (flag==2) {
             return Result.error("密码错误");
         }
+
+        return Result.success();
+    }
+
+    @PostMapping("/update")
+    Result sellerUpdate(@RequestBody SellerUpdateDTO sellerUpdateDTO){
+
+        log.info("商家修改信息,id: {}",sellerUpdateDTO.getId());
+        sellerService.update(sellerUpdateDTO);
 
         return Result.success();
     }
