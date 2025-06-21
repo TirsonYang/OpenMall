@@ -3,8 +3,10 @@ package ytx.openmall.pojo.DTO;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class SellerLoginDTO {
+public class SellerLoginDTO implements Serializable {
 
 
     private String username;

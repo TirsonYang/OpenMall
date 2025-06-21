@@ -98,9 +98,19 @@ public class SellerController {
         return Result.success();
     }
 
+
+    //TODO 解决拦截器问题
+
+    /**
+     * 修改商家信息
+     * @param sellerUpdateDTO
+     * @return
+     */
     @PostMapping("/update")
     Result sellerUpdate(@RequestBody SellerUpdateDTO sellerUpdateDTO){
-
+        if (sellerUpdateDTO==null){
+            throw new BaseException("传参不能为空");
+        }
         log.info("商家修改信息,id: {}",sellerUpdateDTO.getId());
         sellerService.update(sellerUpdateDTO);
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import ytx.openmall.common.properties.JwtProperty;
 import ytx.openmall.common.util.JWTUtils;
+import ytx.openmall.common.util.OssUtils;
 import ytx.openmall.pojo.DTO.SellerLoginDTO;
 import ytx.openmall.pojo.DTO.SellerUpdateDTO;
 import ytx.openmall.pojo.DTO.SellerUpdatePasswordDTO;
@@ -15,6 +16,7 @@ import ytx.openmall.pojo.entity.Seller;
 import ytx.openmall.server.mapper.SellerMapper;
 import ytx.openmall.server.service.SellerService;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -87,10 +89,24 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public void update(SellerUpdateDTO sellerUpdateDTO) {
         Seller seller=new Seller();
+        if (sellerUpdateDTO.getLogo()!=null){
+            try {
+                log.info("上传logo图片：{}", sellerUpdateDTO.getLogo());
+                String logoUrl = OssUtils.upload(sellerUpdateDTO.getLogo());
+                seller.setId(sellerUpdateDTO.getId());
+                seller.setName(sellerUpdateDTO.getName());
+                seller.setPhone(sellerUpdateDTO.getPhone());
+                seller.setLogo(logoUrl);
+                seller.setUpdateTime(LocalDate.now());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            BeanUtils.copyProperties(sellerUpdateDTO,seller);
+            seller.setUpdateTime(LocalDate.now());
+        }
 
-        // TODO 商家头像logo上传阿里云
 
-        BeanUtils.copyProperties(sellerUpdateDTO,seller);
         sellerMapper.updateById(seller);
     }
 

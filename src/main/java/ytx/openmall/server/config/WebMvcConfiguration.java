@@ -20,7 +20,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         log.info("添加拦截器——————————————");
         registry.addInterceptor(jwtSellerInterceptor)
                 .addPathPatterns("/seller/**")
-                .excludePathPatterns("/seller/login");
+                .excludePathPatterns("/seller/login")
+                .excludePathPatterns("/seller/register");
     }
 
 

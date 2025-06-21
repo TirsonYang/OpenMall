@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -17,3 +19,10 @@ open:
     seller-secret-key: ytxseller
     seller-token-name: sellerToken
     seller-ttl: 7200000
+
+  ali:
+    oss:
+      endpoint: ${opem.aliyun.oss.endpoint}
+      access-key-id: ${open.aliyun.oss.accessKeyId}
+      acess-key-secret: ${open.aliyun.oss.accessKeySecret}
+      bucketName: ${open.aliyun.oss.bucketName}
