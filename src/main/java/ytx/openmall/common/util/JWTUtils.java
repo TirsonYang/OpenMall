@@ -24,11 +24,13 @@ public class JWTUtils {
      */
     public static String generateJWT(String key, long ttl,Map<String,Object> claims){
         byte[] bytes = key.getBytes(StandardCharsets.UTF_8);
+        long ttlMillis=ttl+System.currentTimeMillis();
+        Date expiration=new Date(ttlMillis);
 
         return Jwts.builder()
                 .addClaims(claims)
                 .signWith(SignatureAlgorithm.HS256,bytes)
-                .setExpiration(new Date(System.currentTimeMillis()+ttl))
+                .setExpiration(expiration)
                 .compact();
     }
 
@@ -37,15 +39,15 @@ public class JWTUtils {
 
     /**
      * 解析JWT
-     * @param token
+     * @param jwt
      * @return Claims
      */
-    public static Claims parseJWT(String key , String token){
+    public static Claims parseJWT(String key , String jwt){
         byte[] bytes = key.getBytes(StandardCharsets.UTF_8);
 
         return Jwts.parser()
                 .setSigningKey(bytes)
-                .parseClaimsJws(token)
+                .parseClaimsJws(jwt)
                 .getBody();
     }
 
