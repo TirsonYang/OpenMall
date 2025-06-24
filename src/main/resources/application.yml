@@ -17,7 +17,7 @@ mybatis:
 open:
   jwt:
     seller-secret-key: ytxseller
-    seller-token-name: sellerToken
+    seller-token-name: Token
     seller-ttl: 7200000
 
   ali:

@@ -8,7 +8,6 @@ import java.io.Serializable;
 @Data
 public class SellerLoginDTO implements Serializable {
 
-
     private String username;
     private String password;
 

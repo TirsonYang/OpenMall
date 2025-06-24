@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ytx.openmall.common.properties.JwtProperty;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
 
@@ -22,22 +23,28 @@ public class JWTUtils {
      * @return JWT
      */
     public static String generateJWT(String key, long ttl,Map<String,Object> claims){
+        byte[] bytes = key.getBytes(StandardCharsets.UTF_8);
+
         return Jwts.builder()
                 .addClaims(claims)
-                .signWith(SignatureAlgorithm.HS256,key)
+                .signWith(SignatureAlgorithm.HS256,bytes)
                 .setExpiration(new Date(System.currentTimeMillis()+ttl))
                 .compact();
     }
 
 
+
+    //TODO JWT解析失败
     /**
      * 解析JWT
      * @param jwt
      * @return Claims
      */
     public static Claims parseJWT(String key , String jwt){
+        byte[] bytes = key.getBytes(StandardCharsets.UTF_8);
+
         return Jwts.parser()
-                .setSigningKey(key)
+                .setSigningKey(bytes)
                 .parseClaimsJws(jwt)
                 .getBody();
     }

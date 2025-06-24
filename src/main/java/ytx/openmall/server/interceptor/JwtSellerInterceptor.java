@@ -35,16 +35,11 @@ public class JwtSellerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
-            System.out.println("OPTIONS请求，放行");
-            return true;
-        }
-
         if (!(handler instanceof HandlerMethod)){
             return true;
         }
 
-        try {
+//        try {
             log.info("注册拦截器—————");
             String token = request.getHeader(jwtProperty.getSellerTokenName());
             log.info("jwt校验:{}",token);
@@ -54,10 +49,12 @@ public class JwtSellerInterceptor implements HandlerInterceptor {
             BaseContext.setThreadLocal(sellerID);
             return true;
 
-        } catch (Exception e) {
-            response.setStatus(401);     //返回异常状态码
-            return false;
-        }
+//        }
+//        catch (Exception e) {
+//            log.info("jwt校验失败");
+//            response.setStatus(401);     //返回异常状态码
+//            return false;
+//        }
     }
 
 

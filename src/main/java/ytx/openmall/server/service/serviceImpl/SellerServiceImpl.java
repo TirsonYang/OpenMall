@@ -49,7 +49,11 @@ public class SellerServiceImpl implements SellerService {
         sellerMapper.insert(seller);
     }
 
-    //TODO 登录
+    /**
+     * 商家登录
+     * @param sellerLoginDTO
+     * @return
+     */
     @Override
     public SellerLoginVO login(SellerLoginDTO sellerLoginDTO) {
         String password= DigestUtils.md5DigestAsHex(sellerLoginDTO.getPassword().getBytes(StandardCharsets.UTF_8));
@@ -58,13 +62,17 @@ public class SellerServiceImpl implements SellerService {
         SellerLoginVO sellerLoginVO=sellerMapper.login(sellerLoginDTO);
 
         Map<String, Object> claims=new HashMap<>();
-        claims.put("SellerUsername",sellerLoginVO.getUsername());
         claims.put("SellerID",sellerLoginVO.getId());
         String jwt=JWTUtils.generateJWT(jwtProperty.getSellerSecretKey(), jwtProperty.getSellerTtl(), claims);
         sellerLoginVO.setJwt(jwt);
         return sellerLoginVO;
     }
 
+    /**
+     * 商家修改密码
+     * @param sellerUpdatePasswordDTO
+     * @return
+     */
     @Override
     public int updatePassword(SellerUpdatePasswordDTO sellerUpdatePasswordDTO) {
         String oldPassword= DigestUtils.md5DigestAsHex(sellerUpdatePasswordDTO.getOldPassword().getBytes(StandardCharsets.UTF_8));
@@ -83,15 +91,17 @@ public class SellerServiceImpl implements SellerService {
     }
 
 
-    //TODO 修改上传文件接口内容
+    //TODO AOP修改公共字段，如创建时间，更新时间
     /**
      * 修改商家信息
      * @param sellerUpdateDTO
      */
     @Override
     public void update(SellerUpdateDTO sellerUpdateDTO) {
-
-
+        Seller seller=new Seller();
+        BeanUtils.copyProperties(sellerUpdateDTO,seller);
+        seller.setUpdateTime(LocalDate.now());
+        sellerMapper.updateById(seller);
     }
 
 

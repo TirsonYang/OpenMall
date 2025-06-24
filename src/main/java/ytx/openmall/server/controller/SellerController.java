@@ -29,6 +29,8 @@ public class SellerController {
     @Autowired
     private SellerService sellerService;
 
+
+    //TODO 查找数据库，判断是否有相同的username
     /**
      * 商家注册
      * @param sellerRegisterDTO
@@ -89,17 +91,18 @@ public class SellerController {
 
         int flag=sellerService.updatePassword(sellerUpdatePasswordDTO);
 
+        System.out.println(flag);
         if (flag==1){
             return Result.error("用户不存在");
         } else if (flag==2) {
             return Result.error("密码错误");
+        }else {
+            return Result.success();
         }
-
-        return Result.success();
     }
 
 
-    //TODO 解决拦截器问题
+
 
     /**
      * 修改商家信息

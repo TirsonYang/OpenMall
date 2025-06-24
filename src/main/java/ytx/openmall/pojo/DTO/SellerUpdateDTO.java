@@ -13,6 +13,6 @@ import java.io.Serializable;
 public class SellerUpdateDTO implements Serializable {
     private Long id;
     private String name;
-    private MultipartFile logo;
+    private String logo;
     private String phone;
 }
