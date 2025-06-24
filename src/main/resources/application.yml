@@ -22,7 +22,7 @@ open:
 
   ali:
     oss:
-      endpoint: ${opem.aliyun.oss.endpoint}
+      endpoint: ${open.aliyun.oss.endpoint}
       access-key-id: ${open.aliyun.oss.accessKeyId}
       acess-key-secret: ${open.aliyun.oss.accessKeySecret}
       bucketName: ${open.aliyun.oss.bucketName}

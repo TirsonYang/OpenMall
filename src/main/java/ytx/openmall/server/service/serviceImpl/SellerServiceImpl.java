@@ -82,32 +82,16 @@ public class SellerServiceImpl implements SellerService {
         return 0;
     }
 
+
+    //TODO 修改上传文件接口内容
     /**
      * 修改商家信息
      * @param sellerUpdateDTO
      */
     @Override
     public void update(SellerUpdateDTO sellerUpdateDTO) {
-        Seller seller=new Seller();
-        if (sellerUpdateDTO.getLogo()!=null){
-            try {
-                log.info("上传logo图片：{}", sellerUpdateDTO.getLogo());
-                String logoUrl = OssUtils.upload(sellerUpdateDTO.getLogo());
-                seller.setId(sellerUpdateDTO.getId());
-                seller.setName(sellerUpdateDTO.getName());
-                seller.setPhone(sellerUpdateDTO.getPhone());
-                seller.setLogo(logoUrl);
-                seller.setUpdateTime(LocalDate.now());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            BeanUtils.copyProperties(sellerUpdateDTO,seller);
-            seller.setUpdateTime(LocalDate.now());
-        }
 
 
-        sellerMapper.updateById(seller);
     }
 
 
