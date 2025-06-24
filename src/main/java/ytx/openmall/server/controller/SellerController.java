@@ -91,7 +91,6 @@ public class SellerController {
 
         int flag=sellerService.updatePassword(sellerUpdatePasswordDTO);
 
-        System.out.println(flag);
         if (flag==1){
             return Result.error("用户不存在");
         } else if (flag==2) {

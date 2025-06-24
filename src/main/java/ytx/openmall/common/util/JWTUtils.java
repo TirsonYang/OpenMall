@@ -34,18 +34,18 @@ public class JWTUtils {
 
 
 
-    //TODO JWT解析失败
+
     /**
      * 解析JWT
-     * @param jwt
+     * @param token
      * @return Claims
      */
-    public static Claims parseJWT(String key , String jwt){
+    public static Claims parseJWT(String key , String token){
         byte[] bytes = key.getBytes(StandardCharsets.UTF_8);
 
         return Jwts.parser()
                 .setSigningKey(bytes)
-                .parseClaimsJws(jwt)
+                .parseClaimsJws(token)
                 .getBody();
     }
 

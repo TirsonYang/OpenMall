@@ -39,22 +39,21 @@ public class JwtSellerInterceptor implements HandlerInterceptor {
             return true;
         }
 
-//        try {
+        try {
             log.info("注册拦截器—————");
             String token = request.getHeader(jwtProperty.getSellerTokenName());
             log.info("jwt校验:{}",token);
             Claims claims = JWTUtils.parseJWT(jwtProperty.getSellerSecretKey(), token);
-            Long sellerID=Long.valueOf(claims.get("sellerID").toString());
+            Long sellerID=Long.valueOf(claims.get("SellerID").toString());
             log.info("sellerID:{}",sellerID);
             BaseContext.setThreadLocal(sellerID);
             return true;
-
-//        }
-//        catch (Exception e) {
-//            log.info("jwt校验失败");
-//            response.setStatus(401);     //返回异常状态码
-//            return false;
-//        }
+        }
+        catch (Exception e) {
+            log.info("jwt校验失败");
+            response.setStatus(401);     //返回异常状态码
+            return false;
+        }
     }
 
 
