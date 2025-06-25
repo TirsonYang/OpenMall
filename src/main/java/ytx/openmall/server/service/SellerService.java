@@ -19,4 +19,7 @@ public interface SellerService {
     int updatePassword(SellerUpdatePasswordDTO sellerUpdatePasswordDTO);
 
     void update(SellerUpdateDTO sellerUpdateDTO);
+
+    boolean queryByUsername(String username);
+
 }

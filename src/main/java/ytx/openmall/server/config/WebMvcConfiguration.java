@@ -21,6 +21,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addInterceptor(jwtSellerInterceptor)
                 .addPathPatterns("/upload")
                 .addPathPatterns("/seller/**")
+                .addPathPatterns("/product/**")
                 .excludePathPatterns("/seller/login")
                 .excludePathPatterns("/seller/register");
     }

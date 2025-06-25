@@ -17,4 +17,6 @@ public interface SellerMapper {
     Seller queryById(Long id);
 
     void updateById(Seller seller);
+
+    Seller queryByUsername(String username);
 }

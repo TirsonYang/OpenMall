@@ -45,4 +45,9 @@
     <select id="queryById" resultType="ytx.openmall.pojo.entity.Seller">
         select * from open_mall.seller where id=#{id}
     </select>
+
+
+    <select id="queryByUsername" resultType="ytx.openmall.pojo.entity.Seller">
+        select * from open_mall.seller where username=#{username}
+    </select>
 </mapper>

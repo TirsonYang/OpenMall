@@ -1,6 +1,5 @@
 package ytx.openmall.server.controller;
 
-import io.netty.util.ResourceLeakDetector;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,6 @@ public class SellerController {
     private SellerService sellerService;
 
 
-    //TODO 查找数据库，判断是否有相同的username
     /**
      * 商家注册
      * @param sellerRegisterDTO
@@ -42,6 +40,10 @@ public class SellerController {
         //注册时用户名和密码不能为空
         if (sellerRegisterDTO.getUsername()==null&&sellerRegisterDTO.getPassword()==null){
             return Result.error(RegisterConstant.NOT_CAN_BE_NULL);
+        }
+        boolean flag=sellerService.queryByUsername(sellerRegisterDTO.getUsername());
+        if (flag==true){
+            return Result.error(RegisterConstant.USER_EXIST);
         }
         log.info("username:{},password:{}",sellerRegisterDTO.getUsername(),sellerRegisterDTO.getPassword());
         Seller seller=new Seller();

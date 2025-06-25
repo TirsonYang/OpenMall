@@ -24,13 +24,13 @@ public class JWTUtils {
      */
     public static String generateJWT(String key, long ttl,Map<String,Object> claims){
         byte[] bytes = key.getBytes(StandardCharsets.UTF_8);
-        long ttlMillis=ttl+System.currentTimeMillis();
-        Date expiration=new Date(ttlMillis);
+//        long ttlMillis=ttl+System.currentTimeMillis();
+//        Date expiration=new Date(ttlMillis);
 
         return Jwts.builder()
                 .addClaims(claims)
                 .signWith(SignatureAlgorithm.HS256,bytes)
-                .setExpiration(expiration)
+                .setExpiration(new Date(ttl+System.currentTimeMillis()))
                 .compact();
     }
 

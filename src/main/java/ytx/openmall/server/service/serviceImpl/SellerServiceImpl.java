@@ -104,5 +104,15 @@ public class SellerServiceImpl implements SellerService {
         sellerMapper.updateById(seller);
     }
 
+    @Override
+    public boolean queryByUsername(String username) {
+        Seller seller=sellerMapper.queryByUsername(username);
+        if (seller==null){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
 
 }
